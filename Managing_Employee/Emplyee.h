@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include<iostream>
 #include<string>
 #include<cmath>
@@ -22,10 +22,13 @@ public:
 	//Constuctor
 	Employee() { }
 	Employee(string Name, string Address, string Phone, Date birth, vector<Date>so_ngay, double he_so, int LuongCoBan, string Chuc, string ma) : TenNhanVien(Name), DiaChi(Address), SoDienThoai(Phone), Birth(birth), SoNgayDiLam(so_ngay), HeSoLuong(he_so), MucLuongCoBan(LuongCoBan), ChucVu(Chuc), MaNhanVien(ma) { }
-	// Ham tinh luong
-	double TinhLuong() {
+	
+	// Hàm tính lương
+	double TinhLuong()const {
 		return MucLuongCoBan * HeSoLuong;
 	}
+
+	// Toán tử nhập xuất dữ liệu
 	friend ostream& operator<<(ostream& o, const Employee& a) {
 		return o << "Ho va Ten: " << a.TenNhanVien << endl
 			<< "Ma Nhan Vien: " << a.MaNhanVien << endl
@@ -39,21 +42,49 @@ public:
 	}
 	friend istream& operator>>(istream& in, Employee& a) {
 		in >> a.TenNhanVien >> a.Birth >> a.ChucVu >> a.DiaChi >> a.HeSoLuong >> a.MaNhanVien >> a.MucLuongCoBan >> a.SoDienThoai;
-		for (auto& x : a.SoNgayDiLam) {
-			in >> x;
+		int so_ngay;
+		in >> so_ngay;
+		a.SoNgayDiLam.resize(so_ngay);
+		for (int i = 0; i < so_ngay; i++) {
+			in >> a.SoNgayDiLam[i];
 		}
 		return in;
 	}
-	//Ham laY thong tin nhan vien
-	string GetName() { return TenNhanVien; }
-	string GetDiaChi() { return DiaChi; }
-	string GetSDT() { return SoDienThoai; }
+
+	//Toán tử gán
+	Employee& operator=(const Employee& a) {
+
+		TenNhanVien = a.TenNhanVien;
+		DiaChi = a.DiaChi;
+		SoDienThoai = a.SoDienThoai;
+		SoNgayDiLam = a.SoNgayDiLam;
+		MaNhanVien = a.MaNhanVien;
+		ChucVu = a.ChucVu;
+		Birth = a.Birth;
+		MucLuongCoBan = a.MucLuongCoBan;
+		HeSoLuong = a.HeSoLuong;
+
+		return *this;
+	}
+
+
+	// Toán tử so sánh bằng mã nhân viên
+	bool operator==(const Employee& other) const {
+		return MaNhanVien == other.MaNhanVien;  
+	}
+
+
+	//Các hàm lấy thông tin nhân viên
+	string GetName()const { return TenNhanVien; }
+	string GetDiaChi()const { return DiaChi; }
+	string GetSDT()const { return SoDienThoai; }
 	Date GetBirth() { return Birth; }
-	int GetSoNgayDiLam() { return SoNgayDiLam.size(); }
-	double GetHeSoLuong() { return HeSoLuong; }
-	int GetLuongCoBan() { return MucLuongCoBan; }
-	string GetChucVu() { return ChucVu; }
-	string GetMaNhanVien() { return MaNhanVien; }
+	int GetSoNgayDiLam()const { return SoNgayDiLam.size(); }
+	double GetHeSoLuong()const { return HeSoLuong; }
+	int GetLuongCoBan()const { return MucLuongCoBan; }
+	string GetChucVu()const { return ChucVu; }
+	string GetMaNhanVien()const { return MaNhanVien; }
+
 
 	// Cac ham set thong tin Nhan Vien
 	void SetName() { getline(cin, TenNhanVien); }
