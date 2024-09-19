@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+
 using namespace std;
 class Date {
 	int day, month, year;
@@ -19,6 +20,7 @@ public:
 		if (v < min) return min;
 		return v < max ? max : v;
 	}
+
 	// ham lay ra so ngay trong thang
 	int DayOfMonth(int a) {
 		switch (a) {
@@ -34,7 +36,16 @@ public:
 		month = Limit(m, 12, 1);
 		year = y;
 	}
+	Date(Date& a) {
+		this->day = a.day;
+		this->month = a.month;
+		this->year = a.year;
+	}
 	friend ostream& operator<<(ostream& o, const Date& a) {
 		return o << a.day << '/' << a.month << '/' << a.year;
 	}
+	friend istream& operator>>(istream& i, Date& a) {
+		return i >> a.day >> a.month >> a.year;
+	}
 };
+
