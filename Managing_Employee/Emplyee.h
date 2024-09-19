@@ -7,5 +7,5 @@ class Employee {
 	string TenNhanVien;
 	string DiaChi;
 	string SoDienThoai;
-
+	
 };
