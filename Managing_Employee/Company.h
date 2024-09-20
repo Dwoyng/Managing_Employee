@@ -2,7 +2,7 @@
 #include<iostream>
 #include<string>
 #include "Department.h"
-
+#include "sqlite3.h"
 using namespace std;
 class Company {
 	string NameOfCom;

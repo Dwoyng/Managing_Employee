@@ -2,6 +2,7 @@
 #include<string>
 #include<iostream>
 #include "Emplyee.h"
+#include "sqlite3.h"
 using namespace std;
 class Department {
 	string TenPhong;
@@ -96,3 +97,4 @@ public:
 
 	// Ngân sách còn lại sau khi trả lương
 };
+

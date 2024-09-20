@@ -4,7 +4,7 @@
 #include<cmath>
 #include<vector>
 #include "Date.h"
-
+#include "sqlite3.h"
 using namespace std;
 
 class Employee {
