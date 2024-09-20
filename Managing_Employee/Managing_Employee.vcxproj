@@ -131,14 +131,12 @@
     <ClCompile Include="Department.cpp" />
     <ClCompile Include="Emplyee.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="sqlite3.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Company.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="Department.h" />
     <ClInclude Include="Emplyee.h" />
-    <ClInclude Include="sqlite3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

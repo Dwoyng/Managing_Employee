@@ -2,17 +2,17 @@
 #include<iostream>
 #include<string>
 #include "Department.h"
-#include "sqlite3.h"
+#include<istream>
+#include<ostream>
+#include<fstream>
+
 using namespace std;
 class Company {
 	string NameOfCom;
 	vector<Department> CacPhongBan;
 	double TongNganSachCongTy;
 public:
-	// Ngan sach can de tra luong cho nha vien
-
-	// Ngan sach con lai sau khi tra luong cho nhan vien
-
+	
 	// Constructor
 	Company() { }
 	Company(string Name, vector<Department> PhongBan, double NganSach): NameOfCom(Name), CacPhongBan(PhongBan), TongNganSachCongTy(NganSach) { }
@@ -57,4 +57,6 @@ public:
 	// Số tiền cần để trả lương cho nhân viên toàn công ty
 
 	// Số tiền còn lại sau khi trả lương xong
+
+	
 };

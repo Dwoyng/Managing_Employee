@@ -4,7 +4,10 @@
 #include<cmath>
 #include<vector>
 #include "Date.h"
-#include "sqlite3.h"
+#include<fstream>
+#include<ostream>
+#include<istream>
+#include "Department.h"
 using namespace std;
 
 class Employee {
@@ -80,6 +83,7 @@ public:
 	string GetSDT()const { return SoDienThoai; }
 	Date GetBirth() { return Birth; }
 	int GetSoNgayDiLam()const { return SoNgayDiLam.size(); }
+	vector<Date>& NhungNgayLam() { return SoNgayDiLam; }
 	double GetHeSoLuong()const { return HeSoLuong; }
 	int GetLuongCoBan()const { return MucLuongCoBan; }
 	string GetChucVu()const { return ChucVu; }
@@ -87,18 +91,100 @@ public:
 
 
 	// Cac ham set thong tin Nhan Vien
-	void SetName() { getline(cin, TenNhanVien); }
-	void SetDiaChi() { getline(cin, DiaChi); }
-	void SetSDT() { getline(cin, SoDienThoai); }
-	void SetBirth() { cin >> Birth; }
-	void SetNgayDiLam(int n) {
+	void SetName(string Name) { TenNhanVien = Name; }
+	void SetDiaChi(string dia_chi) { DiaChi = dia_chi; }
+	void SetSDT(string sdt) { SoDienThoai = sdt; }
+	void SetBirth(int d, int m, int y) {
+		Birth.SetDate(d);
+		Birth.SetMonth(m);
+		Birth.SetYear(y);
+	}
+	void SetNhungNgayLam(int n) {
 		SoNgayDiLam.resize(n);
 		for (int i = 0; i < n; i++) {
 			 cin >> SoNgayDiLam[i];
 		}
 	}
-	void SetHeSoLuong() { cin >> HeSoLuong; }
-	void SetLuongCoBan() { cin >> MucLuongCoBan; }
-	void SetChuc() { getline(cin, ChucVu); }
-	void SetMaNhanVien() { getline(cin, MaNhanVien); }
+	void SetNgayDiLam(int n) { SoNgayDiLam.resize(n); }
+	void SetHeSoLuong(double he_so) { HeSoLuong = he_so; }
+	void SetLuongCoBan(int luong) { MucLuongCoBan = luong; }
+	void SetChuc(string chuc) { ChucVu = chuc; }
+	void SetMaNhanVien(string ma) { MaNhanVien = ma; }
+
+	// Ghi thông tin của nhân viên vào file text
+	void WriteInfToFileInf(const Employee& a) {
+		int fir = a.Birth.GetDay();
+		int sec = a.Birth.GetMonth();
+		int thir = a.Birth.GetYear();
+		char ma = a.MaNhanVien[0];
+		string u;
+		if (ma == 'A') u = "Department A";
+		if (ma == 'B') u = "Department B";
+		if (ma == 'C') u = "Department C";
+		ofstream file;
+		string s = a.GetName();
+		string outline = s + " inf.txt";
+		file.open("C:\\Users\\ADMIN\\OneDrive\\Documents\\Visual Studio\\Managing_Employee\\Managing_Employee\\Company\\"+ u +"\\" + s +"\\" + outline ,ios::app);
+	
+		if (file.is_open()) {
+			
+			file << a.GetName() << ','
+				<< a.GetMaNhanVien() << ','
+				<< a.GetChucVu() << ','
+				<< fir << '/' << sec << '/' << thir << ','
+				<< a.GetDiaChi() << ','
+				<< a.GetHeSoLuong() << ','
+				<< a.GetLuongCoBan() << ','
+				<< a.GetSDT() << endl;
+			file.close();
+			cout << "Da ghi thong tin thanh cong !" << endl;
+		}
+		else
+		{
+			cout << "Khong the mo file !" << endl;
+		}
+	}
+	// Đoc-xuất thông tin từ file text inf ra
+	void ExportInfFromFileInf(Employee& a) {
+		string u;
+		char ma = a.MaNhanVien[0];
+		if (ma == 'A') u = "Department A";
+		if (ma == 'B') u = "Department B";
+		if (ma == 'C') u = "Department C";
+		string s = a.GetName();
+		string outline = s + " inf.txt";
+		ifstream file("C:\\Users\\ADMIN\\OneDrive\\Documents\\Visual Studio\\Managing_Employee\\Managing_Employee\\Company\\" + u + "\\" + s + "\\" + outline);
+		if (file.is_open()) {
+			string name, ma_nhan_vien, chuc_vu, dia_chi, sdt;
+			double he_so_luong;
+			int luong_co_ban, fir, sec, thir;
+			getline(file, name, ',');
+			getline(file, ma_nhan_vien, ',');
+			getline(file, chuc_vu, ',');
+			file >> fir; file.seekg(1, 1);
+			file >> sec; file.seekg(1, 1);
+			file >> thir; file.seekg(1, 1);
+			getline(file, dia_chi, ',');
+			file >> he_so_luong; file.seekg(1, 1);
+			file >> luong_co_ban; file.seekg(1, 1);
+			getline(file, sdt);
+
+			// thiet lap cac gia tri
+			a.SetName(name);
+			a.SetBirth(fir, sec, thir);
+			a.SetDiaChi(dia_chi);
+			a.SetChuc(chuc_vu);
+			a.SetHeSoLuong(he_so_luong);
+			a.SetLuongCoBan(luong_co_ban);
+			a.SetMaNhanVien(ma_nhan_vien);
+			a.SetSDT(sdt);
+			cout << a;
+			file.close();
+		}
+		else
+		{
+			cout << "Khong the mo file!" << endl;
+		}
+	}
+
 };
