@@ -28,7 +28,7 @@ public:
 	string GetTenPhong()const { return TenPhong; }
 	string GetMaPhong()const { return MaPhong; }
 	int GetDanhSachNhanVien()const { return DanhSachNhanVien.size(); }
-
+	vector<Employee>& LayDanhSachNhanVien() { return DanhSachNhanVien; }
 
 	//Lấy thông tin của 1 nhân viên trong danh sách
 	void GetThongTin(vector<Employee> &a, string ma)const {
@@ -200,7 +200,7 @@ public:
 	}
 	// Kiểm tra xem ngày hôm ấy nhân viên có đi làm hay không
 	bool CheckVar(Employee& a, int d, int m, int y) {
-		for (auto x : a.NhungNgayLam()) {
+		for (auto& x : a.NhungNgayLam()) {
 			if (x == Date(d, m, y)) return true;
 			else return false;
 		}

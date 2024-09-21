@@ -22,7 +22,7 @@ public:
 	vector<Department> GetCacPhong()const { return CacPhongBan; }
 	double GetNganSach()const { return TongNganSachCongTy; }
 	void ThongTinCacPhongBan() {
-		for (auto x : CacPhongBan) {
+		for (const auto& x : CacPhongBan) {
 			cout << x;
 		}
 	}
@@ -44,7 +44,7 @@ public:
 		ofstream file;
 		file.open("CacPhongBan.txt", ios::app);
 		if (file.is_open()) {
-			file << a.GetMaPhong() << ',' << a.GetTenPhong() << ',' << endl;
+			file << a.GetMaPhong() << ',' << a.GetTenPhong() << ',' << a.GetDanhSachNhanVien() << endl;
 			file.close();
 			cout << "Them thanh cong!";
 		}
@@ -52,37 +52,45 @@ public:
 	}
 
 	void DeleteDepartment(const Department& departmentToDelete) {
-		std::ifstream file("CacPhongBan.txt");
-		std::vector<std::string> remainingDepartments;
-		std::string line;
+		ifstream file("CacPhongBan.txt");
+		vector<string> remainingDepartments;
+		string line;
 
 		// Đọc từng dòng từ file và kiểm tra nếu trùng với Department cần xóa
 		while (getline(file, line)) {
-			std::stringstream ss(line);
-			std::string name, code;
+			stringstream ss(line);
+			string name, ma;
+			int so_luong;
 
 			// Giả sử định dạng mỗi dòng là: Tên Phòng, Mã Phòng
 			getline(ss, name, ',');
-			getline(ss, code, ',');
-
+			getline(ss, ma, ',');
+			file >> so_luong;
 			// Nếu thông tin department không trùng khớp thì giữ lại dòng này
-			if (code != departmentToDelete.GetMaPhong()) {
+			if (ma != departmentToDelete.GetMaPhong()) {
 				remainingDepartments.push_back(line);
 			}
 		}
 		file.close();
 	
 		// Ghi lại các phòng ban còn lại vào file
-		std::ofstream outFile("CacPhongBan.txt", std::ios::trunc);  // Mở file ở chế độ ghi đè (truncate)
+		ofstream outFile("CacPhongBan.txt", ios::trunc);  // Mở file ở chế độ ghi đè (truncate)
 		for (const auto& department : remainingDepartments) {
-			outFile << department << std::endl;
+			outFile << department << endl;
 		}
 		outFile.close();
 	}
 
 	//Hàm truy vẫn vào danh sách nhân viên từ class Company
-	void PrinfEmployeeFromCompany() {
-
+	void PrinfEmployeeFromCompany(string ten_phong) {
+		Department a;
+		for (int i = 0; i < CacPhongBan.size(); i++) {
+			if (ten_phong == CacPhongBan[i].GetTenPhong()) a = CacPhongBan[i];
+		}
+		for (int i = 0; i < a.GetDanhSachNhanVien(); i++) {
+			Employee b = a.LayDanhSachNhanVien()[i];
+			a.ExportInfListEmployee(b);
+		}
 	}
 
 
