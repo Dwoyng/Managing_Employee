@@ -27,7 +27,7 @@ public:
 	}
 
 	// ham lay ra so ngay trong thang
-	int DayOfMonth(int a) {
+	int DayOfMonth(int a)const {
 		switch (a) {
 		case 2: return year & 3 ? 28 : 29;
 		case 4: case 9: case 11: case 6: return 30;

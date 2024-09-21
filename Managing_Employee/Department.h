@@ -90,9 +90,9 @@ public:
 
 	// In thông tin của tất các nhân viên trong phòng + Trưởng Phòng
 	void PrintAll() {
-		cin >> TruongPhong;
-		for (auto A : DanhSachNhanVien) {
-			cout << A;
+		cout << TruongPhong;
+		for (int i = 0; i < DanhSachNhanVien.size(); i++) {
+			cout << DanhSachNhanVien[i];
 		}
 	 }
 	
@@ -112,7 +112,7 @@ public:
 
 
 	// Hàm nhập thông tin danh sách nhân viên vào file
-	void InsertListEmployee(const Employee& a) {
+	void InsertListEmployee(const Employee& a)const {
 		string nm = GetTenPhong();
 		string outline = nm + ".txt";
 		ofstream file;
@@ -148,7 +148,7 @@ public:
 
 	// Số ngày đi làm của từng nhân viên
 	// 1.hàm thêm ngày đi làm cho nhân viên
-	void InsertWorkingDay( Employee &a) {
+	void InsertWorkingDay( Employee &a)const {
 		string nm = GetTenPhong();
 		string s = a.GetName();
 		string outline = s + " wd.txt";
@@ -165,7 +165,7 @@ public:
 		}
 	}
 	// 2.Hàm thêm 1 ngày làm vào cho nhân viên
-	void AddOneDay(Employee& a, int d, int m, int y) {
+	void AddOneDay(Employee& a, int d, int m, int y)const {
 		a.NhungNgayLam().push_back(Date(d, m, y));
 		string nm = GetTenPhong();
 		string s = a.GetName();

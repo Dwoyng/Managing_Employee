@@ -38,13 +38,54 @@ public:
 	void SetTongNganSach() { cin >> TongNganSachCongTy; }
 
 	// Các hàm thêm hoặc xóa phòng ban
+
 	void AddDeparment(const Department& a) {
 		CacPhongBan.push_back(a);
+		ofstream file;
+		file.open("CacPhongBan.txt", ios::app);
+		if (file.is_open()) {
+			file << a.GetMaPhong() << ',' << a.GetTenPhong() << ',' << endl;
+			file.close();
+			cout << "Them thanh cong!";
+		}
+		else cout << "Them that bai!";
 	}
-	void RemoveDepartment(const Department& a) {
-		auto it = find(CacPhongBan.begin(), CacPhongBan.end(), a);
-		if (it != CacPhongBan.end()) CacPhongBan.erase(it);
+
+	void DeleteDepartment(const Department& departmentToDelete) {
+		std::ifstream file("CacPhongBan.txt");
+		std::vector<std::string> remainingDepartments;
+		std::string line;
+
+		// Đọc từng dòng từ file và kiểm tra nếu trùng với Department cần xóa
+		while (getline(file, line)) {
+			std::stringstream ss(line);
+			std::string name, code;
+
+			// Giả sử định dạng mỗi dòng là: Tên Phòng, Mã Phòng
+			getline(ss, name, ',');
+			getline(ss, code, ',');
+
+			// Nếu thông tin department không trùng khớp thì giữ lại dòng này
+			if (code != departmentToDelete.GetMaPhong()) {
+				remainingDepartments.push_back(line);
+			}
+		}
+		file.close();
+	
+		// Ghi lại các phòng ban còn lại vào file
+		std::ofstream outFile("CacPhongBan.txt", std::ios::trunc);  // Mở file ở chế độ ghi đè (truncate)
+		for (const auto& department : remainingDepartments) {
+			outFile << department << std::endl;
+		}
+		outFile.close();
 	}
+
+	//Hàm truy vẫn vào danh sách nhân viên từ class Company
+	void PrinfEmployeeFromCompany() {
+
+	}
+
+
 	// Tính tổng tất cả các nhân viên trong công ty
 	int SumEmployeeOfCompany() {
 		int sum = 0;
