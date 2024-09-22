@@ -16,8 +16,9 @@ class Department {
 public:
 
 	// Chọn ra trưởng phòng
-	Employee& SelectCaptian(const Employee& a) {
-		return TruongPhong = a;
+	void SelectCaptian(const Employee& a) {
+		if (!IsEmployeeInDepartment(a))  cout << "Nhan vien nay k thuoc phong nay!";
+		else TruongPhong = a;
 	}
 
 	//Constructor
@@ -112,13 +113,14 @@ public:
 
 
 	// Hàm nhập thông tin danh sách nhân viên vào file
-	void InsertListEmployee(const Employee& a)const {
+	void InsertListEmployee( Employee& a)const {
 		string nm = GetTenPhong();
 		string outline = nm + ".txt";
 		ofstream file;
 		file.open("C:\\Users\\ADMIN\\OneDrive\\Documents\\Visual Studio\\Managing_Employee\\Managing_Employee\\Company\\"+ nm +"\\" + outline, ios::app);
 		if (file.is_open()) {
-			file << a.GetMaNhanVien() << ',' << a.GetName() << ',' << a.GetSDT() << endl;
+			file << a.GetMaNhanVien() << endl << a.GetName() << endl << a.GetChucVu() << endl << a.GetBirth()
+				<< a.GetDiaChi() << endl << a.GetHeSoLuong() << endl << a.GetLuongCoBan() << endl << a.GetSDT() << endl;
 			file.close();
 			cout << "Them thanh cong!" << endl;
 		}
@@ -131,14 +133,31 @@ public:
 		string outline = nm + ".txt";
 		ifstream file("C:\\Users\\ADMIN\\OneDrive\\Documents\\Visual Studio\\Managing_Employee\\Managing_Employee\\Company\\" + nm + "\\" + outline);
 		if (file.is_open()) {
-			string name, ma_nhan_vien, sdt;
-			getline(file, name, ',');
-			getline(file, ma_nhan_vien, ',');
+			string name, ma_nhan_vien, sdt, chuc_vu, dia_chi;
+			int fir = a.GetBirth().GetDay(), sec = a.GetBirth().GetMonth(), thir = a.GetBirth().GetYear(), luong_co_ban;
+			double he_so_luong;
+			getline(file, ma_nhan_vien);
+			getline(file, name);
+			getline(file, chuc_vu);
+			file >> fir; file.seekg(1, 1);
+			file >> sec; file.seekg(1, 1);
+			file >> thir;
+			getline(file, dia_chi);
+			file >> he_so_luong;
+			file >> luong_co_ban;
 			getline(file, sdt);
 
 			a.SetName(name);
+			a.SetMaNhanVien(ma_nhan_vien);
+			a.SetChuc(chuc_vu);
+			a.SetBirth(fir, sec, thir);
+			a.SetDiaChi(dia_chi);
+			a.SetHeSoLuong(he_so_luong);
+			a.SetLuongCoBan(luong_co_ban);
 			a.SetSDT(sdt);
 			a.SetMaNhanVien(ma_nhan_vien);
+
+
 			cout << a;
 			file.close();
 		}

@@ -128,13 +128,13 @@ public:
 	
 		if (file.is_open()) {  
 			
-			file << a.GetName() << ',' 
-				<< a.GetMaNhanVien() << ','
-				<< a.GetChucVu() << ','
-				<< fir << '/' << sec << '/' << thir << ','
-				<< a.GetDiaChi() << ','
-				<< a.GetHeSoLuong() << ','
-				<< a.GetLuongCoBan() << ','
+			file << a.GetMaNhanVien() << endl 
+				<< a.GetName() << endl
+				<< a.GetChucVu() << endl
+				<< fir << '/' << sec << '/' << thir << endl
+				<< a.GetDiaChi() << endl
+				<< a.GetHeSoLuong() << endl
+				<< a.GetLuongCoBan() << endl
 				<< a.GetSDT() << endl;
 			file.close();
 			cout << "Da ghi thong tin thanh cong !" << endl;
@@ -158,15 +158,16 @@ public:
 			string name, ma_nhan_vien, chuc_vu, dia_chi, sdt;
 			double he_so_luong;
 			int luong_co_ban, fir, sec, thir;
-			getline(file, name, ',');     
-			getline(file, ma_nhan_vien, ',');
-			getline(file, chuc_vu, ',');
+			getline(file, name);     
+			getline(file, ma_nhan_vien);
+			getline(file, chuc_vu);
 			file >> fir; file.seekg(1, 1);
 			file >> sec; file.seekg(1, 1);
-			file >> thir; file.seekg(1, 1);
-			getline(file, dia_chi, ',');
-			file >> he_so_luong; file.seekg(1, 1);
-			file >> luong_co_ban; file.seekg(1, 1);
+			file >> thir;
+			file.ignore();
+			getline(file, dia_chi);
+			file >> he_so_luong;
+			file >> luong_co_ban;
 			getline(file, sdt);
 
 			// thiet lap cac gia tri
