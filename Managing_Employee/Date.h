@@ -1,9 +1,7 @@
 ﻿#pragma once
 #include<iostream>
 #include<string>
-#include <iomanip>  // For setw and setfill
-#include <sstream>  // For ostringstream
-#include <cstdio>   // For sscanf
+
 
 
 using namespace std;
@@ -23,7 +21,7 @@ public:
 	// ham gioi han 1 tham so nao day trong khoang nhat dinh
 	int Limit(int v, int max, int min) {
 		if (v < min) return min;
-		return v < max ? max : v;
+		return v < max ? v : max;
 	}
 
 	// ham lay ra so ngay trong thang
@@ -56,5 +54,6 @@ public:
 		if (day == another.day && month == another.month && year == another.year) return true;
 		return false;
 	}
+
 };
 

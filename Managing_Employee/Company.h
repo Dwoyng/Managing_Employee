@@ -5,8 +5,10 @@
 #include<istream>
 #include<ostream>
 #include<fstream>
+#include<sstream>
 
 using namespace std;
+
 class Company {
 	string NameOfCom;
 	vector<Department> CacPhongBan;

@@ -16,7 +16,7 @@ class Department {
 public:
 
 	// Chọn ra trưởng phòng
-	Employee SelectCaptian(const Employee& a) {
+	Employee& SelectCaptian(const Employee& a) {
 		return TruongPhong = a;
 	}
 
@@ -41,7 +41,7 @@ public:
 	// kiểm tra nhân viên có thuốc văn phòng này không
 	bool IsEmployeeInDepartment(const Employee& e) {
 		for (const auto& emp : DanhSachNhanVien) {
-			if (emp.GetMaNhanVien() == e.GetMaNhanVien()) {
+			if (emp.GetMaNhanVien() == e.GetMaNhanVien()) {   
 				return true;
 			}
 		}

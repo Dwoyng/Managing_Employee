@@ -49,7 +49,7 @@ public:
 		in >> so_ngay;
 		a.SoNgayDiLam.resize(so_ngay);
 		for (int i = 0; i < so_ngay; i++) {
-			in >> a.SoNgayDiLam[i];
+			in >> a.SoNgayDiLam[i];   
 		}
 		return in;
 	}
@@ -116,7 +116,7 @@ public:
 		int fir = a.Birth.GetDay();
 		int sec = a.Birth.GetMonth();
 		int thir = a.Birth.GetYear();
-		char ma = a.MaNhanVien[0];
+		char ma = a.MaNhanVien[0];   
 		string u;
 		if (ma == 'A') u = "Department A";
 		if (ma == 'B') u = "Department B";
@@ -126,9 +126,9 @@ public:
 		string outline = s + " inf.txt";
 		file.open("C:\\Users\\ADMIN\\OneDrive\\Documents\\Visual Studio\\Managing_Employee\\Managing_Employee\\Company\\"+ u +"\\" + s +"\\" + outline ,ios::app);
 	
-		if (file.is_open()) {
+		if (file.is_open()) {  
 			
-			file << a.GetName() << ','
+			file << a.GetName() << ',' 
 				<< a.GetMaNhanVien() << ','
 				<< a.GetChucVu() << ','
 				<< fir << '/' << sec << '/' << thir << ','
@@ -158,7 +158,7 @@ public:
 			string name, ma_nhan_vien, chuc_vu, dia_chi, sdt;
 			double he_so_luong;
 			int luong_co_ban, fir, sec, thir;
-			getline(file, name, ',');
+			getline(file, name, ',');     
 			getline(file, ma_nhan_vien, ',');
 			getline(file, chuc_vu, ',');
 			file >> fir; file.seekg(1, 1);
