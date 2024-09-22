@@ -12,17 +12,16 @@ using namespace std;
 class Company {
 	string NameOfCom;
 	vector<Department> CacPhongBan;
-	double TongNganSachCongTy;
 public:
 	
 	// Constructor
 	Company() { }
-	Company(string Name, vector<Department> PhongBan, double NganSach): NameOfCom(Name), CacPhongBan(PhongBan), TongNganSachCongTy(NganSach) { }
+	Company(string Name, vector<Department> PhongBan, double NganSach): NameOfCom(Name), CacPhongBan(PhongBan) { }
 
 	// Các hàm lấy ra thông tin của công ty
 	string GetNameCongTy()const { return NameOfCom; }
 	vector<Department> GetCacPhong()const { return CacPhongBan; }
-	double GetNganSach()const { return TongNganSachCongTy; }
+	
 	void ThongTinCacPhongBan() {
 		for (const auto& x : CacPhongBan) {
 			cout << x;
@@ -37,7 +36,7 @@ public:
 			cin >> CacPhongBan[i];
 		}
 	}
-	void SetTongNganSach() { cin >> TongNganSachCongTy; }
+	
 
 	// Các hàm thêm hoặc xóa phòng ban
 

@@ -12,7 +12,7 @@ class Department {
 	string MaPhong;
 	vector<Employee> DanhSachNhanVien;
 	Employee TruongPhong;
-	double TongNganSachPhong;
+	
 public:
 
 	// Chọn ra trưởng phòng
@@ -22,7 +22,7 @@ public:
 
 	//Constructor
 	Department() { }
-	Department(string Name, string Ma, vector<Employee> NhanSu, double Tien, Employee Captian): TenPhong(Name), MaPhong(Ma), DanhSachNhanVien(NhanSu), TongNganSachPhong(Tien),TruongPhong(Captian) { }
+	Department(string Name, string Ma, vector<Employee> NhanSu, double Tien, Employee Captian): TenPhong(Name), MaPhong(Ma), DanhSachNhanVien(NhanSu),TruongPhong(Captian) { }
 	
 	// Các hàm lấy thông tin
 	string GetTenPhong()const { return TenPhong; }
@@ -48,7 +48,7 @@ public:
 		return false;
 	}
 	
-	double GetNganSachPhong()const { return TongNganSachPhong; }
+	
 	Employee GetTruongPhong() { return TruongPhong; }
 
 
@@ -56,11 +56,11 @@ public:
 	friend ostream& operator<<(ostream& o, const Department& a) {
 		return o << "Phong: " << a.TenPhong << endl
 			<< "Ma: " << a.MaPhong << endl
-			<< "Truong Phong: " << a.TruongPhong << endl
-			<< "Tong Ngan Sach: " << a.TongNganSachPhong << endl;
+			<< "Truong Phong: " << a.TruongPhong << endl;
+			
 	}
 	friend istream& operator>>(istream& in, Department& a) {
-		in >> a.TenPhong >> a.MaPhong >> a.TruongPhong >> a.TongNganSachPhong;
+		in >> a.TenPhong >> a.MaPhong >> a.TruongPhong;
 		int n;
 		in >> n;
 		a.DanhSachNhanVien.resize(n);
@@ -80,8 +80,8 @@ public:
 		}
 	}
 	void SetSoLuongNhanVien(int n) { DanhSachNhanVien.resize(n); }
-	void SetNganSachPhong() { cin >> TongNganSachPhong; }
-	void SetTruongPhong() { cin >> TruongPhong; }
+	
+	void SetTruongPhong(const Employee& a) { TruongPhong = a; }
 
 	// thêm 1 nhân viên
 	void AddEmployee(const Employee &a) {
